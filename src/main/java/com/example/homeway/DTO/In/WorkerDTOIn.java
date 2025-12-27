@@ -38,7 +38,6 @@ public class WorkerDTOIn {
     @Size(min = 6, max = 100)
     private String password;
 
-    // assign in creation
     @NotNull
     private Integer companyId;
 
