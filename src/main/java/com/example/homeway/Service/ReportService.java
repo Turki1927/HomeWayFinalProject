@@ -66,6 +66,11 @@ public class ReportService {
         Request request = requestRepository.findRequestById(requestId);
         if (request == null) throw new ApiException("Request not found");
 
+        //checks if request is completed
+        if(!request.getStatus().equalsIgnoreCase("completed")){
+            throw new ApiException("Report can only be created if request is completed");
+        }
+
         requireRequestOwnedByWorker(request, worker.getId());
 
         Report report = new Report();

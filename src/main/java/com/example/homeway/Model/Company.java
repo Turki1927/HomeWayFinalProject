@@ -38,4 +38,6 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Vehicle> vehicles;
 
+    @OneToMany(mappedBy = "company")
+    private Set<Notification> notifications;
 }

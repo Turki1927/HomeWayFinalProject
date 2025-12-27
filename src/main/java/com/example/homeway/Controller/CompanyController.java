@@ -1,6 +1,7 @@
 package com.example.homeway.Controller;
 import com.example.homeway.API.ApiResponse;
 import com.example.homeway.DTO.In.CompanyDTOIn;
+import com.example.homeway.DTO.In.CompanyStatusDTOIn;
 import com.example.homeway.Model.User;
 import com.example.homeway.Service.CompanyService;
 import jakarta.validation.Valid;
@@ -16,7 +17,6 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    // ===== Company CRUD (no create) =====
     @GetMapping("/get")
     public ResponseEntity<?> getAllCompanies() {
         return ResponseEntity.ok(companyService.getAllCompanies());
@@ -33,8 +33,8 @@ public class CompanyController {
     }
 
     @PutMapping("/update/{companyId}")
-    public ResponseEntity<?> updateCompany(@PathVariable Integer companyId, @RequestBody com.example.homeway.DTO.In.CompanyDTOIn dto) {
-        companyService.updateCompany(companyId, dto);
+    public ResponseEntity<?> updateCompany(@PathVariable Integer companyId, @RequestBody CompanyStatusDTOIn dto) {
+        companyService.updateCompanyStatus(companyId, dto);
         return ResponseEntity.ok(new ApiResponse("company updated"));
     }
 
