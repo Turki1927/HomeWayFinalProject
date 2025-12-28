@@ -63,6 +63,7 @@ public class AIService {
         return content != null ? content.toString() : "AI returned no content.";
     }
 
+    //template
     public String methodName(String input) {
         String prompt = """
                 You are an ... assistant.
@@ -81,4 +82,350 @@ public class AIService {
         return askChat(prompt);
     }
 
+    //Osama
+    public String CustomerInspectionCostEstimation(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String CustomerReportSummary(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String WorkerIssueDiagnosis(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String MovingCompanyMovingEstimation(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String WorkerJobTimeEstimation(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String MaintenanceCompanyMaintenancePlan(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String RedesignCompanyRedesignScope(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    //turki
+    public String CustomerServicesTimeEstimation(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String CustomerReviewWritingAssist(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+
+    public String WorkerRepairChecklist(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String WorkerSafetyRequirements(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String CompanyServiceEstimationCost(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String MaintenanceCompanySparePartsCosts(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    //leen
+    public String CustomerAskAIWhatServiceDoesTheIssueFits(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String CustomerIsFixOrDesignCheaper(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String WorkerReportCreationAssistent(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+    public String CompanyInspectionPlanningAssistent(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
+
+
+    public String MovingCompanyTimeAdvice(String CityAndTime) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(CityAndTime);
+
+        return askChat(prompt);
+    }
+
+    public String MaintenanceFixOrReplace(String input) {
+        String prompt = """
+                You are an ... assistant.
+                Explain in clear, simple steps how to ...  and list some simple resources, be short 5-8 sentences:
+
+                input: %s
+
+                Mention:
+                - 1
+                - 2
+                - 3
+                - 4
+                
+                """.formatted(input);
+
+        return askChat(prompt);
+    }
 }

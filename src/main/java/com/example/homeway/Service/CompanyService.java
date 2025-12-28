@@ -153,18 +153,17 @@ public class CompanyService {
             throw new ApiException("only approved requests can be started");
         }
 
-        if(!"paid".equalsIgnoreCase(request.getStatus())){
-            throw new ApiException("offer is not paid yet");
+        Offer offer = request.getOffer();
+        if (offer == null) {
+            throw new ApiException("offer does not exist for this request");
         }
 
-//        Offer offer = request.getOffer();
-//        if (offer == null) {
-//            throw new ApiException("offer does not exist for this request");
-//        }
-//
-//        if (!"accepted".equalsIgnoreCase(offer.getStatus())) {
-//            throw new ApiException("offer is not paid yet");
-//        }
+        if (!"ACCEPTED".equalsIgnoreCase(request.getOffer().getStatus()))
+            throw new ApiException("Offer is not accepted");
+
+        if (!Boolean.TRUE.equals(request.getIsPaid()))
+            throw new ApiException("Request is not paid yet");
+
 
         Worker worker = workerRepository.findAvailableInspectorWorker(company.getId());
         if (worker == null){
@@ -314,7 +313,7 @@ public class CompanyService {
 
         Offer offer = new Offer();
         offer.setPrice(price);
-        offer.setStatus("not_paid");
+        offer.setStatus("pending");
         offer.setCreatedAt(LocalDateTime.now());
         offer.setRequest(request);
         offerRepository.save(offer);
@@ -367,9 +366,17 @@ public class CompanyService {
         if (offer == null) {
             throw new ApiException("offer does not exist for this request");
         }
-        if (!"paid".equalsIgnoreCase(offer.getStatus())){
-            throw new ApiException("offer is not paid yet");
+
+        if (!"ACCEPTED".equalsIgnoreCase(offer.getStatus())) {
+            throw new ApiException("Offer is not accepted yet");
         }
+
+        if (!Boolean.TRUE.equals(request.getIsPaid())) {
+            throw new ApiException("Request is not paid yet");
+        }
+
+
+
 
         //CHECK IF HE IS ACTIVE
         //assign worker and vehicle
@@ -536,7 +543,7 @@ public class CompanyService {
 
         Offer offer = new Offer();
         offer.setPrice(price);
-        offer.setStatus("not_paid");
+        offer.setStatus("pending");
         offer.setCreatedAt(LocalDateTime.now());
         offer.setRequest(request);
         offerRepository.save(offer);
@@ -591,10 +598,13 @@ public class CompanyService {
         if (offer == null) {
             throw new ApiException("offer does not exist for this request");
         }
-        if (!"paid".equalsIgnoreCase(offer.getStatus())) {
-            throw new ApiException("offer is not paid yet");
+        if (!"ACCEPTED".equalsIgnoreCase(offer.getStatus())) {
+            throw new ApiException("Offer is not accepted yet");
         }
 
+        if (!Boolean.TRUE.equals(request.getIsPaid())) {
+            throw new ApiException("Request is not paid yet");
+        }
         if (request.getWorker() != null) {
             throw new ApiException("request already has an assigned worker");
         }
@@ -732,7 +742,7 @@ public class CompanyService {
 
         Offer offer = new Offer();
         offer.setPrice(price);
-        offer.setStatus("not_paid");
+        offer.setStatus("pending");
         offer.setCreatedAt(LocalDateTime.now());
         offer.setRequest(request);
         offerRepository.save(offer);
@@ -783,8 +793,13 @@ public class CompanyService {
         if (offer == null) {
             throw new ApiException("offer does not exist for this request");
         }
-        if (!"paid".equalsIgnoreCase(offer.getStatus())) throw new ApiException("offer is not paid yet");
+        if (!"ACCEPTED".equalsIgnoreCase(offer.getStatus())) {
+            throw new ApiException("Offer is not accepted yet");
+        }
 
+        if (!Boolean.TRUE.equals(request.getIsPaid())) {
+            throw new ApiException("Request is not paid yet");
+        }
         Worker worker = workerRepository.findAvailableMaintenanceWorker(company.getId());
         if (worker == null) throw new ApiException("no available maintenance worker found");
 
