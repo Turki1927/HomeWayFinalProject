@@ -82,7 +82,7 @@ public class AIService {
         return askChat(prompt);
     }
 
-    //Osama
+    //O
     public String customerRequestCostEstimation(String input) {
         String prompt = """
                 You are a home services pricing assistant.
@@ -232,7 +232,7 @@ public class AIService {
         return askChat(prompt);
     }
 
-    //turki
+    //t
     public String customerServicesTimeEstimation(String input) {
         String prompt = """
                          You are a home-services timeline estimation assistant for a property platform.
@@ -397,7 +397,7 @@ public class AIService {
         return askChat(prompt);
     }
 
-    //Leen
+    //L
     // 1) Before creating request: what service fits?
     public String customerAskAIWhatServiceDoesTheIssueFits(String input) {
         String prompt = """
@@ -594,7 +594,7 @@ public class AIService {
                 5) Keep the response short and action-focused.
                 
                 Output:
-                1) Summary (14 lines), organize it to make it easy to read
+                1) Detailed Summary (not too long just enough), organize it to make it easy to read
                 2) What service it needs, inspection, maintenance.
                 3) Tips, list them (1,2,3,..)
                 """.formatted(url,language);
