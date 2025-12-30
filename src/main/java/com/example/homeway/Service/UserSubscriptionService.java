@@ -50,8 +50,7 @@ public class UserSubscriptionService {
             throw new ApiException("User not found with id " + userId);
         }
 
-        UserSubscription existingSub =
-                UserSubscriptionRepository.findUserSubscriptionById(userId);
+        UserSubscription existingSub = UserSubscriptionRepository.findUserSubscriptionById(userId);
 
         if (existingSub != null &&
                 "ACTIVE".equalsIgnoreCase(existingSub.getStatus())) {
