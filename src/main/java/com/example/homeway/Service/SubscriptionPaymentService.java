@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,9 @@ public class SubscriptionPaymentService {
     private static final String MOYASAR_API_URL = "https://api.moyasar.com/v1/payments/";
 
     // ================== CREATE PAYMENT ==================
-    public ResponseEntity<Map<String, String>> processPayment(SubscriptionPayment paymentRequest, Integer subscriptionId) {
+    public ResponseEntity<Map<String, String>> processPayment(
+            SubscriptionPayment paymentRequest,
+            Integer subscriptionId) {
 
         UserSubscription subscription =
                 UserSubscriptionRepository.findUserSubscriptionById(subscriptionId);
@@ -44,9 +47,8 @@ public class SubscriptionPaymentService {
             throw new ApiException("Subscription not found");
         }
 
-        String callbackUrl = "https://dashboard.moyasar.com/payments";
+        paymentRequest.setName("Homeway User");
 
-        paymentRequest.setName(subscription.getUser().getUsername());
         paymentRequest.setAmount(subscription.getMonthlyPrice());
         paymentRequest.setCurrency("SAR");
 
@@ -54,15 +56,24 @@ public class SubscriptionPaymentService {
             throw new ApiException("Insufficient amount");
         }
 
+        String callbackUrl = "https://dashboard.moyasar.com/payments";
+
         String requestBody = String.format(
-                "source[type]=card&source[name]=%s&source[number]=%s&source[cvc]=%s" +
-                        "&source[month]=%s&source[year]=%s&amount=%d&currency=%s&callback_url=%s",
+                "source[type]=card" +
+                        "&source[name]=%s" +
+                        "&source[number]=%s" +
+                        "&source[cvc]=%s" +
+                        "&source[month]=%s" +
+                        "&source[year]=%s" +
+                        "&amount=%d" +
+                        "&currency=%s" +
+                        "&callback_url=%s",
                 paymentRequest.getName(),
                 paymentRequest.getNumber(),
                 paymentRequest.getCvc(),
                 paymentRequest.getMonth(),
                 paymentRequest.getYear(),
-                (int) (paymentRequest.getAmount() * 100),
+                (int) (paymentRequest.getAmount() * 100), // هللة
                 paymentRequest.getCurrency(),
                 callbackUrl
         );
@@ -74,19 +85,25 @@ public class SubscriptionPaymentService {
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<String> response = restTemplate.exchange(
-                MOYASAR_API_URL,
-                HttpMethod.POST,
-                entity,
-                String.class
-        );
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.exchange(
+                    MOYASAR_API_URL,
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+            );
+        } catch (HttpClientErrorException e) {
+            throw new ApiException("Payment failed: " + e.getResponseBodyAsString());
+        }
 
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode json = mapper.readTree(response.getBody());
 
             String transactionId = json.get("id").asText();
-            String transactionUrl = json.get("source").get("transaction_url").asText();
+            String transactionUrl =
+                    json.get("source").get("transaction_url").asText();
 
             paymentRequest.setTransactionId(transactionId);
             paymentRequest.setRedirectToCompletePayment(transactionUrl);
@@ -106,6 +123,7 @@ public class SubscriptionPaymentService {
             throw new ApiException("Error parsing payment response");
         }
     }
+
 
     // ================== CHECK PAYMENT STATUS ==================
     public String subscribePaymentStatus(Integer userId, Integer subscriptionId) {

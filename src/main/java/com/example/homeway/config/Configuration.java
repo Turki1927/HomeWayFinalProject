@@ -24,10 +24,10 @@ public class Configuration {
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/register","/api/v1/pay/confirm/**","/api/v1/payment/callBack","/api/v1/payment/status/*","/api/v1/payment/test/mark-paid/*").permitAll()
+                        .requestMatchers("/api/v1/auth/register/**","/api/v1/pay/confirm/**","/api/v1/payment/callBack","/api/v1/payment/status/*","/api/v1/payment/test/mark-paid/*").permitAll()
                         // all or testing
                         .requestMatchers("/api/v1/admin/companies/**","/api/v1/company/get","/api/v1/company/get/*","/api/v1/company/get-by-role/*",
-                        "/api/v1/company/update/*","/api/v1/company/delete/*","/api/v1/vehicle/get",
+                                "/api/v1/company/update/*","/api/v1/company/delete/*","/api/v1/vehicle/get",
                                 "/api/v1/customer/get", "/api/v1/customer/update","/api/v1/customer/delete","/api/v1/notifications/admin/**","/api/v1/offer/admin/**", "/api/v1/request/get/*","/api/v1/request/get-by-customer/*",
                                 "/api/v1/request/get-by-company/*","/api/v1/user/**","/api/v1/subscription/get","/api/v1/vehicle/get").hasAuthority("ADMIN")
                         // admin ^
@@ -44,7 +44,7 @@ public class Configuration {
                         //each company ^
                         .requestMatchers("/api/v1/company/ai/cost-estimation/*","/api/v1/company/worker/**",
                                 "/api/v1/company/reportWriting","/api/v1/company/image-diagnosis/**","/api/v1/notifications/company/**","/api/v1/report/**","/api/v1/review/company/**","/api/v1/subscription/**").hasAnyAuthority("INSPECTION_COMPANY","MOVING_COMPANY","MAINTENANCE_COMPANY","REDESIGN_COMPANY","WORKER")
-                       // worker and companies ^
+                        // worker and companies ^
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout
