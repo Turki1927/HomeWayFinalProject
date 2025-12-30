@@ -492,3 +492,230 @@
 <h3>المسؤول</h3>
 <ul>
   <li>الموافقة/رفض تسجيلات الشركات
+<li>الموافقة/رفض تسجيلات الشركات.</li>
+  <li>الإشراف على بيانات المنصة والمستخدمين والإشعارات.</li>
+  <li>إدارة العمليات والحوكمة على مستوى المنصة.</li>
+</ul>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+<hr />
+
+<h2 id="architecture-ar">4. البنية المعمارية</h2>
+<p>
+  تتبع HomeWay بنية Spring Boot متعددة الطبقات للحفاظ على المسؤوليات واضحة وقابلة للتوسع:
+</p>
+
+<h3>طبقة المتحكم (Controller)</h3>
+<ul>
+  <li>واجهات برمجية RESTful للعملاء والشركات والعمال والمسؤولين.</li>
+  <li>المصادقة عبر Spring Security (Basic Auth) و<code>@AuthenticationPrincipal</code>.</li>
+</ul>
+
+<h3>طبقة الخدمة (Service)</h3>
+<ul>
+  <li>منطق الأعمال + تطبيق سير العمل (انتقالات الحالة، فحوصات الملكية، تقييد الأدوار).</li>
+  <li>عمليات معاملية لدورة حياة الطلب، وتعيين الموارد، وتأكيد الدفع.</li>
+  <li>فحوصات الاشتراك التي تقيد ميزات الذكاء الاصطناعي.</li>
+</ul>
+
+<h3>طبقة الاستمرارية (Persistence)</h3>
+<ul>
+  <li>تعيينات علائقية باستخدام JPA/Hibernate.</li>
+  <li>ملكية قوية للكيانات عبر <code>@OneToOne</code> و<code>@ManyToOne</code> و<code>@MapsId</code>.</li>
+</ul>
+
+<h3>التكاملات الخارجية</h3>
+<ul>
+  <li><strong>ميسر (Moyasar)</strong> للمدفوعات (العروض + فوترة الاشتراك).</li>
+  <li><strong>OpenAI API</strong> لنقاط نهاية المساعدة بالذكاء الاصطناعي.</li>
+  <li>خدمة البريد الإلكتروني لإشعارات التجديد والانتهاء.</li>
+</ul>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+<hr />
+
+<h2 id="core-workflows-ar">5. سير العمل الأساسي</h2>
+
+<h3>سير طلب الخدمة</h3>
+<ol>
+  <li>العميل يختار عقارًا وشركة، ثم ينشئ طلبًا (<strong>قيد الانتظار</strong>).</li>
+  <li>الشركة تراجع الطلب:
+    <ul>
+      <li><strong>الموافقة</strong>: إنشاء عرض بسعر → يتحول الطلب إلى <strong>موافق عليه</strong>.</li>
+      <li><strong>الرفض</strong>: يتحول الطلب إلى <strong>مرفوض</strong>.</li>
+    </ul>
+  </li>
+  <li>العميل يقبل العرض ويكمل الدفع (يمثل بوابة لتنفيذ الخدمة).</li>
+  <li>الشركة تبدأ الطلب:
+    <ul>
+      <li>التحقق من: قبول العرض + دفع الطلب + الحالة الصحيحة.</li>
+      <li>تعيين عامل متاح (ومركبة لطلبات النقل).</li>
+      <li>تحديث التوافر وتغيير حالة الطلب إلى <strong>قيد التنفيذ</strong>.</li>
+    </ul>
+  </li>
+  <li>الشركة تُكمل الطلب:
+    <ul>
+      <li>إطلاق موارد العامل/المركبة واستعادة التوافر.</li>
+      <li>تغيير حالة الطلب إلى <strong>مكتمل</strong> وتخزين تواريخ الإكمال.</li>
+    </ul>
+  </li>
+  <li>إنشاء إشعارات في الخطوات الرئيسية لضمان وضوح الحالة للعميل/الشركة/العامل.</li>
+</ol>
+
+<h3>سير الدفع</h3>
+<ol>
+  <li>العميل يدفع العرض المقبول عبر ميسر.</li>
+  <li>النظام يتحقق من حالة الدفع عبر واجهات ميسر.</li>
+  <li>يتم تحديث <code>isPaid</code> تلقائيًا عند نجاح التحقق.</li>
+  <li>لا يمكن بدء/إكمال الطلب ما لم يتم الدفع.</li>
+</ol>
+
+<h3>سير ميزات الذكاء الاصطناعي</h3>
+<ol>
+  <li>المستخدم يشترك في خطة الذكاء الاصطناعي (تخزين الاشتراك وتتبع الدفع).</li>
+  <li>كل نقطة نهاية للذكاء الاصطناعي تتحقق من حالة الاشتراك قبل الاستجابة.</li>
+  <li>قواعد إضافية تُطبق حسب نوع الأداة:
+    <ul>
+      <li>يجب أن يكون العامل نشطًا لأدوات العامل.</li>
+      <li>يجب أن يتطابق دور الشركة مع نوع الميزة (مثل أدوات النقل لشركة النقل).</li>
+    </ul>
+  </li>
+  <li>تُرجع استجابات الذكاء الاصطناعي بصيغة منظمة وقابلة للتنفيذ.</li>
+</ol>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+<hr />
+
+<h2 id="problems-solved-ar">6. المشاكل التي تم حلها</h2>
+<ul>
+  <li><strong>طلبات خدمة غير منظمة:</strong> فرض دورة حياة محكومة وانتقالات حالة صحيحة.</li>
+  <li><strong>غموض التسعير:</strong> استخدام عروض واضحة + قبول قبل الدفع.</li>
+  <li><strong>تعارضات الموارد:</strong> منع التعيين المزدوج للعمال/المركبات عبر تتبع التوافر.</li>
+  <li><strong>وصول غير مصرح به:</strong> تقييد قوي قائم على الدور والتحقق من الملكية للعمليات الحساسة.</li>
+  <li><strong>ضعف التواصل:</strong> نظام إشعارات مدمج للأحداث الحرجة في الخدمة.</li>
+  <li><strong>نقص دعم القرار:</strong> أدوات ذكاء اصطناعي للتخطيط والتقدير والتشخيص والتوثيق.</li>
+  <li><strong>قابلية التوسع:</strong> بنية معيارية تدعم إضافة خدمات وأدوات جديدة دون إعادة تصميم.</li>
+</ul>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+<hr />
+
+<h2 id="contributing-ar">7. المساهمة</h2>
+<p>
+  تم تطوير هذا المشروع كمشروع تخرج تعاوني. النسخة الحالية تمثل تنفيذًا كاملاً لمنصة HomeWay
+  مع جميع الميزات وسير العمل المخطط لها.
+</p>
+<p>
+  بينما يعرض هذا المستودع عملنا النهائي، نرحب بالملاحظات والاقتراحات والنقاشات حول التنفيذ.
+  إذا كنت ترغب في معرفة المزيد عن ميزة معينة أو لديك أسئلة حول نهجنا:
+</p>
+<ul>
+  <li>افتح Issue لمناقشة التحسينات المحتملة أو لطرح أسئلة عن البنية المعمارية.</li>
+  <li>راجع وثائقنا الشاملة لفهم قرارات التصميم وسير العمل.</li>
+  <li>اطّلع على وثائق Postman وحالات الاختبار لاستكشاف نقاط النهاية.</li>
+</ul>
+<p>
+  إذا رغبت بالبناء على هذا العمل أو تكييفه لحالة استخدام خاصة بك، يمكنك عمل Fork للمستودع.
+  يرجى الحفاظ على البنية الحالية (Controller → Service → Repository) والالتزام بقواعد التحقق
+  والترخيص عند إجراء أي تعديلات.
+</p>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+<hr />
+
+<h2 id="contributors-ar">8. المساهمون</h2>
+
+<h3><a href="https://github.com/Turki1927">@Turki1927</a></h3>
+<p><strong>تطوير الواجهة الخلفية:</strong></p>
+<ul>
+  <li>كيانات العقار، العامل، المسؤول</li>
+  <li>نظام الإشعارات</li>
+  <li>SubscriptionPaymentService، UserSubscriptionService</li>
+  <li>سير الطلبات: الصيانة وإعادة التصميم</li>
+</ul>
+<p><strong>الاختبار والتصميم:</strong></p>
+<ul>
+  <li>اختبارات JUnit (طبقة الخدمة)</li>
+  <li>اختبار Postman (محلي/نشر)</li>
+  <li>التصميم الأولي على Figma</li>
+  <li>مخطط الفئات (Class Diagram)</li>
+</ul>
+<p><strong>التكاملات الخارجية:</strong></p>
+<ul>
+  <li>تكامل دفع الاشتراك (ميسر)</li>
+  <li>تكامل البريد الإلكتروني (الاشتراك/الإشعارات)</li>
+  <li>
+    نقاط نهاية الذكاء الاصطناعي:
+    customerServicesTimeEstimation، customerReviewWritingAssist، workerRepairChecklist،
+    workerSafetyRequirements، companyServiceEstimationCost، maintenanceCompanySparePartsCosts
+  </li>
+</ul>
+
+<h3><a href="https://github.com/leenref">@leenref</a></h3>
+<p><strong>تطوير الواجهة الخلفية:</strong></p>
+<ul>
+  <li>كيانات التقرير، المركبة، العميل</li>
+  <li>RequestPaymentService</li>
+  <li>سير الطلب: النقل</li>
+</ul>
+<p><strong>الاختبار والتوثيق:</strong></p>
+<ul>
+  <li>اختبارات JUnit (طبقة المتحكم)</li>
+  <li>اختبار Postman (محلي/نشر)</li>
+  <li>توثيق Postman</li>
+  <li>التصميم الأولي على Figma</li>
+  <li>مخطط الفئات (Class Diagram)</li>
+</ul>
+<p><strong>النشر والتكاملات الخارجية:</strong></p>
+<ul>
+  <li>نشر المنصة</li>
+  <li>تكامل دفع الخدمة (ميسر)</li>
+  <li>
+    نقاط نهاية الذكاء الاصطناعي:
+    customerAskAIWhatServiceDoesTheIssueFits، customerIsFixOrDesignCheaper،
+    workerReportCreationAssistant، companyInspectionPlanningAssistant،
+    movingCompanyTimeAdvice، maintenanceFixOrReplace
+  </li>
+</ul>
+
+<h3><a href="https://github.com/OsamaAlahmadi-90">@OsamaAlahmadi-90</a></h3>
+<p><strong>تطوير الواجهة الخلفية:</strong></p>
+<ul>
+  <li>كيانات المستخدم، العرض (Offer)، UserRegister، المراجعة (Review)، الشركة (Company)</li>
+  <li>سير الطلب: الفحص</li>
+</ul>
+<p><strong>الاختبار والتصميم:</strong></p>
+<ul>
+  <li>اختبارات JUnit (طبقة المستودع)</li>
+  <li>اختبار Postman (محلي/نشر)</li>
+  <li>التصميم النهائي على Figma</li>
+  <li>مخطط الفئات (Class Diagram)</li>
+  <li>مخطط حالات الاستخدام (Use Case Diagram)</li>
+  <li>العرض التقديمي للمشروع</li>
+</ul>
+<p><strong>التكاملات الخارجية:</strong></p>
+<ul>
+  <li>تكامل البريد الإلكتروني (طلبات الشركة/العميل)</li>
+  <li>
+    نقاط نهاية الذكاء الاصطناعي:
+    customerRequestCostEstimation، customerReportSummary، workerIssueDiagnosis،
+    movingCompanyResourceMovingEstimation، workerJobTimeEstimation،
+    maintenanceCompanyMaintenancePlan، redesignCompanyRedesignScope،
+    customerRedesignFromImage، companyIssueImageDiagnosis
+  </li>
+</ul>
+
+<p><a href="#top-ar">↑ العودة للأعلى</a></p>
+
+</div>
+
+
+
+
+
+
