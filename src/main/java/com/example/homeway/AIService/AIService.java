@@ -601,4 +601,45 @@ public class AIService {
 
         return askChat(prompt);
     }
+    public String customerRedesignFromImage(String url, String language) {
+
+        String prompt = """
+            You are an interior redesign assistant for a home services platform.
+            The user provides an IMAGE URL of a room or a place.
+            Analyze the visible space and propose a redesign plan.
+
+            Keep it practical, realistic, and easy to follow.
+            Be short but useful (8–14 lines max). Avoid long paragraphs.
+
+            image url:
+            %s
+
+            language:
+            %s
+
+            Rules:
+            1) If the image is NOT accessible, low quality, too dark, or unclear: say so and ask for 1–2 better photos + specify angles (wide shot + close-up of problem area).
+            2) Do NOT invent measurements, brands, or materials you can't confirm from the image.
+            3) If you notice safety risks (exposed wires, mold, water near outlets, structural cracks), flag it as "HIGH risk" and recommend INSPECTION first.
+            4) Focus on redesign: layout, colors, lighting, furniture, storage, finishes.
+            5) Give options: budget-friendly and mid-range upgrades.
+
+            Output (use these headings exactly):
+            1) Space Summary: (1-2 lines)
+            2) Style Direction (pick 1 main + 1 alternative): (2 bullets)
+            3) Suggested Changes:
+               
+            Layout (1-2 bullets)
+            Colors & Materials (2 bullets)
+            Lighting (1-2 bullets)
+            Furniture/Decor (2 bullets)
+            Storage (1 bullet)
+            4) Quick Shopping List (5 bullets max, generic items only)
+            5) First 3 Steps to Start (1,2,3)
+            6) Questions to Confirm (3 short questions)
+            """.formatted(url, language);
+
+        return askChat(prompt);
+    }
+
 }

@@ -114,6 +114,7 @@ public class NotificationService {
         notification.setCustomer(customer);
 
         notificationRepository.save(notification);
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Notification received: "+ notification.getTitle(),  notification.getMessage());
     }
 
     // =====================================
@@ -177,6 +178,7 @@ public class NotificationService {
         notification.setCompany(company);
 
         notificationRepository.save(notification);
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Notification received: "+ notification.getTitle(),  notification.getMessage());
     }
 
 

@@ -6,6 +6,7 @@ import com.example.homeway.DTO.Ai.RepairChecklistDTOIn;
 import com.example.homeway.DTO.In.CompanyDTOIn;
 import com.example.homeway.DTO.In.CompanyStatusDTOIn;
 import com.example.homeway.DTO.Out.CompanyDTOOut;
+import com.example.homeway.EmailService.EmailService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class CompanyService {
     private final OfferRepository offerRepository;
     private final NotificationRepository notificationRepository;
     private final AIService aiService;
+    private final EmailService emailService;
 
     public List<CompanyDTOOut> getAllCompanies() {
         List<CompanyDTOOut> outs = new ArrayList<>();
@@ -120,6 +122,7 @@ public class CompanyService {
 
         //notification
         createCustomerNotification(request.getCustomer(),"approved request","Your request was approved. Please accept/reject the offer.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been approved, offer price: "+ offer.getPrice() + "Sar");
     }
 
 
@@ -325,6 +328,7 @@ public class CompanyService {
         requestRepository.save(request);
 
         createCustomerNotification(request.getCustomer(), "approved request", "Your moving request was approved. Please accept/reject the offer.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been approved, offer price: "+ offer.getPrice() + "Sar");
     }
 
 
@@ -509,6 +513,7 @@ public class CompanyService {
         requestRepository.save(request);
 
         createCustomerNotification(request.getCustomer(),"request rejected","Your moving request has been rejected.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been rejected");
     }
 
     public void approveRedesignRequest(User user, Integer requestId, Double price) {
@@ -554,11 +559,8 @@ public class CompanyService {
         request.setStatus("approved");
         requestRepository.save(request);
 
-        createCustomerNotification(
-                request.getCustomer(),
-                "Approved request",
-                "Your redesign request was approved. Please accept/reject the offer."
-        );
+        createCustomerNotification(request.getCustomer(), "Approved request", "Your redesign request was approved. Please accept/reject the offer.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been approved, offer price: "+ offer.getPrice() + "Sar");
     }
 
     @Transactional
@@ -710,6 +712,7 @@ public class CompanyService {
         requestRepository.save(request);
 
         createCustomerNotification(request.getCustomer(), "Request rejected", "Your redesign request has been rejected.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been rejected");
     }
 
     public void approveMaintenanceRequest(User user, Integer requestId, Double price) {
@@ -754,6 +757,7 @@ public class CompanyService {
         requestRepository.save(request);
 
         createCustomerNotification(request.getCustomer(), "approved request", "Your maintenance request was approved. Please accept/reject the offer.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been approved, offer price: "+ offer.getPrice() + "Sar");
     }
 
     @Transactional
@@ -906,6 +910,7 @@ public class CompanyService {
         requestRepository.save(request);
 
         createCustomerNotification(request.getCustomer(), "request rejected", "Your maintenance request has been rejected.");
+        emailService.sendEmail("osama.alahmadi90@gmail.com", "Request approved", ", your request with id: "+ requestId+ "has been rejected");
     }
 
     private void createCustomerNotification(Customer customer, String title, String message) {
@@ -918,6 +923,7 @@ public class CompanyService {
         notification.setCustomer(customer);
 
         notificationRepository.save(notification);
+
     }
 
     //ai

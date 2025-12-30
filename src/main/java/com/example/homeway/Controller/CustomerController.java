@@ -86,4 +86,9 @@ public class CustomerController {
         return ResponseEntity.status(200).body(new ApiResponse("Offer rejected"));
     }
 
+    @PostMapping("/ai/redesign-from-image/{language}")
+    public ResponseEntity<?> redesignFromImage(@AuthenticationPrincipal User user, @RequestBody @Valid DescriptionDTOIn dto, @PathVariable String language) {
+        String result = customerService.customerRedesignFromImage(user, dto.getDescription(), language);
+        return ResponseEntity.status(200).body(result);
+    }
 }

@@ -289,6 +289,26 @@ public class CustomerService {
 
         return aiService.customerIsFixOrDesignCheaper(dto.getDescription());
     }
+    public String customerRedesignFromImage(User user, String imageUrl, String language) {
+
+        if (user == null) {
+            throw new ApiException("unauthorized");
+        }
+
+        if (user.getCustomer() == null) {
+            throw new ApiException("customer profile not found");
+        }
+
+        if (!Boolean.TRUE.equals(user.getIsSubscribed())) {
+            throw new ApiException("You must be subscribed to use AI features");
+        }
+
+        if (imageUrl == null || imageUrl.isBlank()) {
+            throw new ApiException("image url is required");
+        }
+
+        return aiService.customerRedesignFromImage(imageUrl, language);
+    }
 }
 
 
