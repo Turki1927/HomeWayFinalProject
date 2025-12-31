@@ -356,7 +356,7 @@
   <li>
     <strong>AWS Domain:</strong>
     <a href="https://HomeWay-Application-env.eba-nr2pgrvr.eu-central-1.elasticbeanstalk.com" target="_blank" rel="noopener noreferrer">
-      Open Live Application
+      https://HomeWay-Application-env.eba-nr2pgrvr.eu-central-1.elasticbeanstalk.com
     </a>
   </li>
 </ul>
