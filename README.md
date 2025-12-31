@@ -23,8 +23,7 @@
   <li><a href="#architecture">4. Architecture</a></li>
   <li><a href="#core-workflows">5. Core Workflows</a></li>
   <li><a href="#problems-solved">6. Problems Solved</a></li>
-  <li><a href="#contributing">7. Contributing</a></li>
-  <li><a href="#contributors">8. Contributors</a></li>
+  <li><a href="#contributors">7. Contributors</a></li>
 </ul>
 
 <hr />
@@ -345,8 +344,7 @@
   <li><a href="#architecture-ar">4. البنية المعمارية</a></li>
   <li><a href="#core-workflows-ar">5. سير العمل الأساسي</a></li>
   <li><a href="#problems-solved-ar">6. المشاكل التي تم حلها</a></li>
-  <li><a href="#contributing-ar">7. المساهمة</a></li>
-  <li><a href="#contributors-ar">8. المساهمون</a></li>
+  <li><a href="#contributors-ar">7. المساهمون</a></li>
 </ul>
 
 <hr />
