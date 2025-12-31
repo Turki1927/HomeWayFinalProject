@@ -325,13 +325,41 @@
 
 <h2 id="Important-URLs">8. Important URLs</h2>
 <ul>
-  <li><strong>Class Diagram:</strong> https://github.com/leenref](https://lucid.app/lucidchart/47e4b69c-9bff-418c-ad03-7ed25d25c199/edit?viewport_loc=-1816%2C-1410%2C4462%2C2187%2C0_0&invitationId=inv_36319b19-7def-45b6-a86b-72934fe0c837 </li>
-  <li><strong>Use Case Diagram :</strong> https://drive.google.com/drive/folders/1jB0D8T1SjteDa87LWLz9frjvSCUzD8IX?usp=sharing </li>
-  <li><strong>Figma:</strong>https://www.figma.com/proto/5OcMdpnEfV2zYJfFpeEIv3/Untitled?node-id=1-462&p=f&t=6bHOrJYD9VWWDFO3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A462&show-proto-sidebar=1</li>
-  <li><strong>Postman Documentation:</strong> https://documenter.getpostman.com/view/49822372/2sBXVbGtCP </li>
-  <li><strong>AWS Domain:</strong> HomeWay-Application-env.eba-nr2pgrvr.eu-central-1.elasticbeanstalk.com </li>
-</ul>
+  <li>
+    <strong>Class Diagram:</strong>
+    <a href="https://lucid.app/lucidchart/47e4b69c-9bff-418c-ad03-7ed25d25c199/edit?viewport_loc=-1816%2C-1410%2C4462%2C2187%2C0_0&invitationId=inv_36319b19-7def-45b6-a86b-72934fe0c837" target="_blank" rel="noopener noreferrer">
+      View on Lucidchart
+    </a>
+  </li>
 
+  <li>
+    <strong>Use Case Diagram:</strong>
+    <a href="https://drive.google.com/drive/folders/1jB0D8T1SjteDa87LWLz9frjvSCUzD8IX?usp=sharing" target="_blank" rel="noopener noreferrer">
+      View on Google Drive
+    </a>
+  </li>
+
+  <li>
+    <strong>Figma Prototype:</strong>
+    <a href="https://www.figma.com/proto/5OcMdpnEfV2zYJfFpeEIv3/Untitled?node-id=1-462&p=f&t=6bHOrJYD9VWWDFO3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A462&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer">
+      Open Design
+    </a>
+  </li>
+
+  <li>
+    <strong>Postman Documentation:</strong>
+    <a href="https://documenter.getpostman.com/view/49822372/2sBXVbGtCP" target="_blank" rel="noopener noreferrer">
+      View API Docs
+    </a>
+  </li>
+
+  <li>
+    <strong>AWS Domain:</strong>
+    <a href="https://HomeWay-Application-env.eba-nr2pgrvr.eu-central-1.elasticbeanstalk.com" target="_blank" rel="noopener noreferrer">
+      Open Live Application
+    </a>
+  </li>
+</ul>
 <p><a href="#top">↑ Back to top</a></p>
 </div>
 
