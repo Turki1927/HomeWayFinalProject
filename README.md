@@ -325,13 +325,11 @@
 
 <h2 id="Important-URLs">8. Important URLs</h2>
 <ul>
-  <li><strong>Class Diagram: href="[https://github.com/leenref](https://lucid.app/lucidchart/47e4b69c-9bff-418c-ad03-7ed25d25c199/edit?viewport_loc=-1816%2C-1410%2C4462%2C2187%2C0_0&invitationId=inv_36319b19-7def-45b6-a86b-72934fe0c837 </li>
-  <li><strong>Pricing ambiguity:</strong> Uses explicit offers + acceptance before payment.</li>
-  <li><strong>Resource conflicts:</strong> Prevents double-assignment of workers/vehicles with availability tracking.</li>
-  <li><strong>Unauthorized access:</strong> Strong role-based and ownership validation for sensitive operations.</li>
-  <li><strong>Poor communication:</strong> Built-in notifications for all critical service events.</li>
-  <li><strong>Lack of decision support:</strong> AI tools assist planning, estimation, diagnosis, and documentation.</li>
-  <li><strong>Scalability:</strong> Modular structure supports adding service types and AI tools without redesign.</li>
+  <li><strong>Class Diagram:</strong> https://github.com/leenref](https://lucid.app/lucidchart/47e4b69c-9bff-418c-ad03-7ed25d25c199/edit?viewport_loc=-1816%2C-1410%2C4462%2C2187%2C0_0&invitationId=inv_36319b19-7def-45b6-a86b-72934fe0c837 </li>
+  <li><strong>Use Case Diagram :</strong> https://drive.google.com/drive/folders/1jB0D8T1SjteDa87LWLz9frjvSCUzD8IX?usp=sharing </li>
+  <li><strong>Figma:</strong>https://www.figma.com/proto/5OcMdpnEfV2zYJfFpeEIv3/Untitled?node-id=1-462&p=f&t=6bHOrJYD9VWWDFO3-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A462&show-proto-sidebar=1</li>
+  <li><strong>Postman Documentation:</strong> https://documenter.getpostman.com/view/49822372/2sBXVbGtCP </li>
+  <li><strong>AWS Domain:</strong> HomeWay-Application-env.eba-nr2pgrvr.eu-central-1.elasticbeanstalk.com </li>
 </ul>
 
 <p><a href="#top">↑ Back to top</a></p>
