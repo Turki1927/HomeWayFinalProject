@@ -20,9 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequiredArgsConstructor
 public class RequestPaymentService {
 
-    //i wil change it to this when deployed
-    //@Value("${app.base.url}")
-    //private String baseUrl;
+   @Value("${app.base.url}")
+    private String baseUrl;
 
     @Value("${moyasar.api.key}")
     private String apikey;
@@ -101,9 +100,7 @@ public class RequestPaymentService {
                 ? "SAR"
                 : paymentRequest.getCurrency();
 
-        String callbackUrl = (paymentRequest.getCallbackUrl() == null || paymentRequest.getCallbackUrl().isBlank())
-                ? "http://localhost:8080/api/v1/payment/callBack?offerId=" + offerId
-                : paymentRequest.getCallbackUrl();
+        String callbackUrl = baseUrl + "/api/v1/payment/callBack?offerId=" + offerId;
 
 
         String description = "HomeWay Offer #" + offerId;
@@ -119,6 +116,10 @@ public class RequestPaymentService {
 
         Request request = offer.getRequest();
         if (request == null) throw new ApiException("Offer is not linked to a request");
+
+        if (!"ACCEPTED".equalsIgnoreCase(offer.getStatus())) {
+            throw new ApiException("Offer must be accepted before confirming payment");
+        }
 
         if (Boolean.TRUE.equals(request.getIsPaid())) {
             throw new ApiException("Request already paid");
