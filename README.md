@@ -277,6 +277,43 @@
   <li>AI endpoints: customerServicesTimeEstimation, customerReviewWritingAssist, workerRepairChecklist, workerSafetyRequirements, companyServiceEstimationCost, maintenanceCompanySparePartsCosts</li>
 </ul>
 
+<h4>Implemented Backend Endpoints</h4>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Endpoint Path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>/add/plan-type/{planType}</td></tr>
+    <tr><td>2</td><td>/cancel-subscription/{subscriptionId}</td></tr>
+    <tr><td>3</td><td>/activate-subscription/{subscriptionId}</td></tr>
+    <tr><td>4</td><td>/renew</td></tr>
+    <tr><td>5</td><td>/history-payment</td></tr>
+    <tr><td>6</td><td>/manage-subscription</td></tr>
+    <tr><td>7</td><td>/confirm/{subscriptionId}/transaction/{transactionId}</td></tr>
+    <tr><td>8</td><td>/company/send/{customerId}</td></tr>
+    <tr><td>9</td><td>/customer/send/{companyId}</td></tr>
+    <tr><td>10</td><td>/redesign/approve/{requestId}/price/{price}</td></tr>
+    <tr><td>11</td><td>/redesign/start/{requestId}</td></tr>
+    <tr><td>12</td><td>/redesign/complete/{requestId}</td></tr>
+    <tr><td>13</td><td>/redesign/reject/{requestId}</td></tr>
+    <tr><td>14</td><td>/maintenance/approve/{requestId}/price/{price}</td></tr>
+    <tr><td>15</td><td>/maintenance/start/{requestId}</td></tr>
+    <tr><td>16</td><td>/maintenance/complete/{requestId}</td></tr>
+    <tr><td>17</td><td>/maintenance/reject/{requestId}</td></tr>
+    <tr><td>18</td><td>/ai/ServiceEstimator/{requestId}</td></tr>
+    <tr><td>19</td><td>/review-assist/{requestId}</td></tr>
+    <tr><td>20</td><td>/worker/repair-checklist</td></tr>
+    <tr><td>21</td><td>/worker/safety-requirements</td></tr>
+    <tr><td>22</td><td>/ai/cost-estimation/{requestId}</td></tr>
+    <tr><td>23</td><td>/maintenance/spare-parts</td></tr>
+  </tbody>
+</table>
+
+
 <h3><a href="https://github.com/leenref">@leenref</a></h3>
 <p><strong>Backend Development:</strong></p>
 <ul>
