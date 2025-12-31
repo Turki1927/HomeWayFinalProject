@@ -24,6 +24,7 @@
   <li><a href="#core-workflows">5. Core Workflows</a></li>
   <li><a href="#problems-solved">6. Problems Solved</a></li>
   <li><a href="#contributors">7. Contributors</a></li>
+ <li><a href="#Important-URLs">8. Important URLs</a></li>
 </ul>
 
 <hr />
@@ -321,6 +322,19 @@
 
 <p><a href="#top">↑ Back to top</a></p>
 
+
+<h2 id="Important-URLs">8. Important URLs</h2>
+<ul>
+  <li><strong>Class Diagram <a href="[https://github.com/leenref](https://lucid.app/lucidchart/47e4b69c-9bff-418c-ad03-7ed25d25c199/edit?viewport_loc=-1816%2C-1410%2C4462%2C2187%2C0_0&invitationId=inv_36319b19-7def-45b6-a86b-72934fe0c837)"></a>: </li>
+  <li><strong>Pricing ambiguity:</strong> Uses explicit offers + acceptance before payment.</li>
+  <li><strong>Resource conflicts:</strong> Prevents double-assignment of workers/vehicles with availability tracking.</li>
+  <li><strong>Unauthorized access:</strong> Strong role-based and ownership validation for sensitive operations.</li>
+  <li><strong>Poor communication:</strong> Built-in notifications for all critical service events.</li>
+  <li><strong>Lack of decision support:</strong> AI tools assist planning, estimation, diagnosis, and documentation.</li>
+  <li><strong>Scalability:</strong> Modular structure supports adding service types and AI tools without redesign.</li>
+</ul>
+
+<p><a href="#top">↑ Back to top</a></p>
 </div>
 
 <!-- Arabic Content -->
